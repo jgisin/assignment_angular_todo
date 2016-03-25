@@ -5,10 +5,29 @@ todoApp.controller('TodoCtrl', [
                 completed: false }];
 
     $scope.createTodo = function(text, date) {
-      var todoObj = {text: text, dueDate: date, completed: false}
+      var todoObj = {text: text, dueDate: date, completed: false};
       $scope.text = '';
       $scope.date = '';
       $scope.items.push(todoObj);
-    }
+    };
+
+    $scope.deleteTodo = function($index){
+      $scope.items.splice($index, 1);
+    };
+
+    $scope.check = function(item){
+      console.log(item.completed);
+    };
+
+    $scope.clearCompleted = function(){
+      var counter = 0;
+      var length = $scope.items.length;
+      for(var i=0; i < length; i++){
+        if($scope.items[i - counter].completed){
+          $scope.deleteTodo(i - counter);
+          counter++;
+        }
+      }
+    };
   }
 ]);

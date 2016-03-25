@@ -15,25 +15,27 @@
     <div class="row">
       <h1>Todo App</h1>
 
-      <label>Desc: 
+      <label>Desc:
         <input ng-model="text"></input>
       </label>
 
-      <label>Due Date: 
+      <label>Due Date:
         <input ng-model="date"></input>
       </label>
 
-      <button ng-click="createTodo(text, date)" class="vcenter btn btn-primary btn-md">Create Todo</button>
+      <button ng-click="createTodo(text, date)" class="btn btn-primary btn-md">Create Todo</button>
+      <button ng-click="clearCompleted()" class="btn btn-warning btn-md">Clear Completed Todos</button>
       <br>
     </div>
 
     <div class="row">
       <table class="table">
         <tbody>
-          <tr ng-repeat="item in items">
+          <tr ng-repeat="item in items" ng-class="{true: 'greyed', false: 'solid'}[item.completed]">
             <td>{{item.text}}</td>
             <td>{{item.dueDate | date:'MM-dd-yyyy HH:mm:ss'}}</td>
-            <td>{{item.completed}}</td>
+            <td><input type="checkbox" ng-model="item.completed" ng-click="check(item)"></input></td>
+            <td ng-click="deleteTodo($index)"><button class="btn btn-sm btn-danger">X</button></td>
           </tr>
         </tbody>
       </table>
