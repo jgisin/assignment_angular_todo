@@ -1,29 +1,21 @@
 todoApp.controller('TodoCtrl', [
-  '$scope', '$window', function($scope, $window){
-    $scope.items = [{ text: "Get groceries from the store",
-                dueDate: new Date(),
-                completed: false }];
+  '$scope', 'todoService', function($scope, todoService){
+
+    $scope.items = todoService.getItems();
+    $scope.filters = todoService.getFilters();
 
     $scope.createTodo = function(text, date) {
-      var todoObj = {text: text, dueDate: date, completed: false};
+      todoService.createTodo(text, date);
       $scope.text = '';
       $scope.date = '';
-      $scope.items.push(todoObj);
     };
 
     $scope.deleteTodo = function($index){
-      $scope.items.splice($index, 1);
+      todoService.deleteTodo($index);
     };
 
     $scope.clearCompleted = function(){
-      var counter = 0;
-      var length = $scope.items.length;
-      for(var i=0; i < length; i++){
-        if($scope.items[i - counter].completed){
-          $scope.deleteTodo(i - counter);
-          counter++;
-        }
-      }
+      todoService.clearCompleted();
     };
 
     $scope.showHide = true;
@@ -34,6 +26,6 @@ todoApp.controller('TodoCtrl', [
       } else {
         $scope.showHide = true;
       }
-    }
+    };
   }
 ]);
