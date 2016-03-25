@@ -1,7 +1,12 @@
 todoApp.factory('todoService', function(){
   var obj = {};
 
-  obj.filters = ['None', 'Completed on Top', 'Completed on Bottom', 'Due Date Ascending', 'Due Date Descending'];
+  obj.filters = [{name: 'None', value: ''}, 
+              {name: 'Completed on Top', value: "'completed': false"}, 
+              {name: 'Completed on Bottom', value: "'completed': true"}, 
+              {name: 'Due Date Ascending', value: 'date'}, 
+              {name: 'Due Date Descending', value: '-date'}
+              ];
 
   obj.getFilters = function(){
     return obj.filters;
@@ -9,6 +14,12 @@ todoApp.factory('todoService', function(){
 
   obj.items = [{ text: "Get groceries from the store",
               dueDate: new Date(),
+              completed: false },
+              { text: "apples",
+              dueDate: new Date() - 20000 * 3600,
+              completed: false },
+              { text: "oranges",
+              dueDate: new Date() - 60000 * 3600,
               completed: false }];
 
   obj.createTodo = function(text, date) {

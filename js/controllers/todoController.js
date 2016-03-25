@@ -4,6 +4,8 @@ todoApp.controller('TodoCtrl', [
     $scope.items = todoService.getItems();
     $scope.filters = todoService.getFilters();
 
+    $scope.test = '-date';
+
     $scope.createTodo = function(text, date) {
       todoService.createTodo(text, date);
       $scope.text = '';

@@ -26,16 +26,19 @@
       <button ng-click="createTodo(text, date)" class="btn btn-primary btn-md">Create Todo</button>
       <button ng-click="clearCompleted()" class="btn btn-warning btn-md">Clear Completed Todos</button>
       <button ng-click="showHidden()" class="btn btn-success btn-md">Showing Completed Todos: {{ showHide }}</button>
-      <select class='form-control' ng-repeat="filter in filters" ng-model="filter">
 
+      <select ng-model="filter" ng-options="filter.name for filter in filters">
       </select>
       <br>
+      <p>
+        {{ filter.value }}
+      </p>
     </div>
 
     <div class="row">
       <table class="table">
         <tbody>
-          <tr ng-repeat="item in items | filter: showHide && showCompleted" ng-class="{true: 'greyed', false: 'solid'}[item.completed]" todo-list-item item='item' delete-todo='deleteTodo($index)'>
+          <tr ng-repeat="item in items | filter: showHide && showCompleted | orderBy: filter.value" ng-class="{true: 'greyed', false: 'solid'}[item.completed]" todo-list-item item='item' delete-todo='deleteTodo($index)'>
           </tr>
         </tbody>
       </table>
