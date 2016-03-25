@@ -1,18 +1,18 @@
 todoApp.factory('todoService', function(){
   var obj = {};
 
-  obj.filters = [{name: 'None', value: ''}, 
-              {name: 'Completed on Top', value: "'completed': false"}, 
-              {name: 'Completed on Bottom', value: "'completed': true"}, 
-              {name: 'Due Date Ascending', value: 'date'}, 
-              {name: 'Due Date Descending', value: '-date'}
+  obj.filters = [{name: 'None', value: ''},
+              {name: 'Completed on Top', value: "-completed"},
+              {name: 'Completed on Bottom', value: "completed"},
+              {name: 'Due Date Ascending', value: 'dueDate'},
+              {name: 'Due Date Descending', value: '-dueDate'}
               ];
 
   obj.getFilters = function(){
     return obj.filters;
   };
 
-  obj.items = [{ text: "Get groceries from the store",
+  var _items = [{ text: "Get groceries from the store",
               dueDate: new Date(),
               completed: false },
               { text: "apples",
@@ -24,23 +24,23 @@ todoApp.factory('todoService', function(){
 
   obj.createTodo = function(text, date) {
     var todoObj = {text: text, dueDate: date, completed: false};
-    obj.items.push(todoObj);
+    _items.push(todoObj);
   };
 
   obj.deleteTodo = function($index){
-    obj.items.splice($index, 1);
+    _items.splice($index, 1);
   };
 
   obj.clearCompleted = function(){
-    for(var i=obj.items.length - 1; i >= 0; i--){
-      if(obj.items[i].completed){
+    for(var i=_items.length - 1; i >= 0; i--){
+      if(_items[i].completed){
         obj.deleteTodo(i);
       }
     }
   };
 
   obj.getItems = function(){
-    return obj.items;
+    return _items;
   };
 
   return obj;
