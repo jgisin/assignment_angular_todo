@@ -15,10 +15,6 @@ todoApp.controller('TodoCtrl', [
       $scope.items.splice($index, 1);
     };
 
-    $scope.check = function(item){
-      console.log(item.completed);
-    };
-
     $scope.clearCompleted = function(){
       var counter = 0;
       var length = $scope.items.length;
@@ -29,5 +25,15 @@ todoApp.controller('TodoCtrl', [
         }
       }
     };
+
+    $scope.showHide = true;
+
+    $scope.showHidden = function() {
+      if ($scope.showHide) {
+        $scope.showHide = false;
+      } else {
+        $scope.showHide = true;
+      }
+    }
   }
 ]);
